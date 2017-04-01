@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Electro</title>
+  </head>
+  <body>
+    <h1 id="ip">Starting server. Please Wait...</h1>
+    <video id="player"></video>
+    <script src="node_modules/video.js/dist/video.js"></script>
+    <script src="node_modules/videojs-youtube/dist/Youtube.js"></script>
+    <script src="player/renderer.js"></script>
+    <script>
+      (function() {
+        const ip = require('ip').address();
+        console.log(ip)
+        document.getElementById('ip').innerHTML = `<h1>Send your videos here: ${ip}:3000/yt/{youtube id}</h1>`;
+      })()
+    </script>
+  </body>
+</html>

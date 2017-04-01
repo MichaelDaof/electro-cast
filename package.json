@@ -1,0 +1,19 @@
+{
+  "name": "electro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "./node_modules/.bin/electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.6.2",
+    "express": "^4.15.2",
+    "ip": "^1.1.5",
+    "video.js": "^5.19.0",
+    "videojs-youtube": "^2.3.2"
+  }
+}
