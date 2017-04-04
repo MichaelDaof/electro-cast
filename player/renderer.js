@@ -1,4 +1,4 @@
-const playerMsgConfig = require('./playerMsgConfig')
+const playerMsgConfig = require('./player/playerMsgConfig')
 const { ipcRenderer } = require('electron')
 const videojs = window.videojs || require('video.js')
 const vjsOptions = {
