@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="" rel="stylesheet">
+    <title>Electro</title>
+    <link href="./style.css" rel="stylesheet">
   </head>
   <body>
-    <div id="root"></div>
-    <h1>Wuzzup</h1>
+    <h1 id="ip">Starting server. Please Wait...</h1>
+    <video id="player"></video>
+    <script src="../node_modules/video.js/dist/video.js"></script>
+    <script src="../node_modules/videojs-youtube/dist/Youtube.js"></script>
+    <script src="./renderer.js"></script>
+    <script>
+      (function() {
+        const ip = require('ip').address();
+        console.log(ip)
+        document.getElementById('ip').innerHTML = `<p>Go here ${ip}:3000 to send videos</p>`;
+      })()
+    </script>
   </body>
 </html>
