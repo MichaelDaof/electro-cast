@@ -1,12 +1,18 @@
-const { expressApp, server } = require('../server');
+const electron = require('electron')
+const { app, BrowserWindow } = electron;
 const path = require('path')
 const url = require('url')
-const configApp = require('../server/configApp')
+const makeServerWithWindow = require('../server/index')
 
-module.exports = function(electron, win) {
-  const { app, BrowserWindow } = electron;
+module.exports = function(win) {
+  
+  /**
+   * Creates Electron BrowserWindow AND returns API for 
+   * controlling global Window
+   */
   function createWindow () {
     // Create the browser window.
+    // TODO: Make a devMode alternative window
     win = new BrowserWindow({
       // width: 800, 
       // height: 600
@@ -15,7 +21,7 @@ module.exports = function(electron, win) {
 
     // and load the index.html of the app.
     win.loadURL(url.format({
-      pathname: path.join(__dirname, '../index.html'),
+      pathname: path.join(__dirname, '../display/index.html'),
       protocol: 'file:',
       slashes: true
     }))
@@ -31,13 +37,27 @@ module.exports = function(electron, win) {
       win = null
     })
 
-    configApp(expressApp, win)
+    // She's ready to go
+    // Function wrappers to protect global window during heavy interaction
+    return {
+      send: function send(...args) {
+        win.webContents.send(...args)
+      }
+    }
+  }
+
+  function launchApp() {
+    const PORT = 3000
+    // Start server with newly created Electron window. 
+    // CONSIDER: Not an asynchronous action, but a Promise could be more instructive
+    // and readable here.
+    makeServerWithWindow(createWindow()).listen(PORT, () => console.log(`Server started from Electron on port ${PORT}`))
   }
 
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
-  app.on('ready', createWindow)
+  app.on('ready', launchApp)
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
@@ -55,5 +75,7 @@ module.exports = function(electron, win) {
       createWindow()
     }
   })
+
+  return app
 
 }
