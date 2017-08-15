@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import debounce from 'lodash/debounce';
 
 import Search from './Search'
 
@@ -13,7 +14,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = defaultState;
-    this.setSearchState.bind(this)
+    this.setSearchState = this.setSearchState.bind(this)
   }
   setSearchState(search) {
     this.setState({search})
@@ -21,8 +22,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Changed</h1>
-        <Search setSearchState />
+        <header>
+          <h1>Send some videos</h1>
+          <Search setSearchState={this.setSearchState} searchState={this.state.search}/>
+        </header>
         {/*
           Make search
           Make some action stuff
