@@ -1,7 +1,9 @@
 const router = require('express').Router();
 
-module.exports = router;
+module.exports = function(windowMessenger) {
+  router.get('/', (req, res) => {
+    res.sendFile('./index.html')
+  })
 
-router.get('/', (req, res) {
-  res.send()
-})
+  return router;
+};

@@ -7,7 +7,7 @@
   "scripts": {
     "prestart": "npm install",
     "start": "./node_modules/.bin/electron .",
-    "build": "electron-packager ."
+    "build": "sh build.sh"
   },
   "author": "",
   "license": "ISC",

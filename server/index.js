@@ -5,8 +5,10 @@
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
+const path = require('path')
 
 // Routers!
+const homeRouter = require('./routers/homeRouter')
 const youtubeRouter = require('./routers/youtubeRouter');
 
 /**
@@ -16,6 +18,8 @@ module.exports = function(windowMessenger) {
   /////////////////////////////////////////////////////////////////////////////
   // Config routing and middleware -- move configuration to it's own module? //
   /////////////////////////////////////////////////////////////////////////////
+  app.use(express.static(path.join(__dirname, '../client/build')))
+  app.use('/', homeRouter(windowMessenger))
   app.use('/yt', youtubeRouter(windowMessenger))
 
 

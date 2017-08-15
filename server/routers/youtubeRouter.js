@@ -1,5 +1,5 @@
 /**
- * Youtube app! Needs window messenger!
+ * Youtube app! Needs reference to an instance of BrowserWindow.
  */
 const router = require('express').Router();
 
