@@ -1,14 +1,19 @@
 import React from 'react';
 
-const Item = (props) => {
+const Item = ({
+  id,
+  title,
+  description,
+  thumbnail,
+  onClickVideo
+}) => {
+
   return (
-    <li>
-      {/*
-        Style this box
-        Make handler for Electron API
-      */}
-      {props.id}
-    </li>
+    <div onClick={onClickVideo(id)}>
+      <img src={thumbnail} />
+      {title}
+      {description}
+    </div>
   )
 }
 

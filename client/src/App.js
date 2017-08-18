@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Search from './Search'
-import Drake from './Drake'
 import VideoList from './VideoList'
 
 class App extends Component {
@@ -22,7 +21,6 @@ class App extends Component {
           Make result display
           Use RxJS?
         */}
-        <Drake />
         <VideoList />
       </div>
     );

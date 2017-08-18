@@ -10,7 +10,6 @@ const Search = ({ onChangeHandler, input}) => {
       <Debounce time="500" handler="onChange">
         <input onChange={onChangeHandler} placeholder="Search YouTube"/>
       </Debounce>
-      { input }
     </div>
   )
 }
