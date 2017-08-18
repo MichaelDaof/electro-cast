@@ -1,24 +1,33 @@
 import React from 'react'
-import debounce from 'lodash/debounce';
+import { connect } from 'react-redux'
+import { Debounce } from 'react-throttle'
 
-export default function Search({ setSearchState, searchState }) {
+import { searchYoutube, searchInput } from './actions'
 
-  // We'll create the handler in case we can use that extra enclosed scope
-  const makeInputOnChangeHandler = (whatevs) => {
-    return (e) => {
-      e.preventDefault();
-      const val = e.target.value;
-      setSearchState(val)
-      console.log(searchState)
-    }
-  }
-  const clearHandler = (e) => {
-    setSearchState('')
-  }
+const Search = ({ onChangeHandler, input}) => {
   return (
     <div>
-      <input onInput={makeInputOnChangeHandler('shrug')} placeholder="Search YouTube" value={searchState}/>
-      <button onClick={clearHandler}>clear</button>
+      <Debounce time="500" handler="onChange">
+        <input onChange={onChangeHandler} placeholder="Search YouTube"/>
+      </Debounce>
+      { input }
     </div>
   )
 }
+
+const mapStateToProps = state => {
+  return {
+    input: state.input
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChangeHandler: e => {
+      const val = e.target.value;
+      dispatch(searchYoutube(val))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

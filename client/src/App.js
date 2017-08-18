@@ -1,30 +1,20 @@
 import React, { Component } from 'react';
-import debounce from 'lodash/debounce';
 
 import Search from './Search'
-
-const defaultState = {
-  search: '',
-  results: {
-    // whatever the data structure of youtubeAPI
-  }
-}
+import Drake from './Drake'
+import VideoList from './VideoList'
 
 class App extends Component {
   constructor() {
     super()
-    this.state = defaultState;
-    this.setSearchState = this.setSearchState.bind(this)
   }
-  setSearchState(search) {
-    this.setState({search})
-  }
+
   render() {
     return (
       <div>
         <header>
           <h1>Send some videos</h1>
-          <Search setSearchState={this.setSearchState} searchState={this.state.search}/>
+          <Search />
         </header>
         {/*
           Make search
@@ -32,6 +22,8 @@ class App extends Component {
           Make result display
           Use RxJS?
         */}
+        <Drake />
+        <VideoList />
       </div>
     );
   }
